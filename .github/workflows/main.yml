@@ -5,6 +5,7 @@ on:
 jobs:     
     deploy:
         runs-on: self-hosted
+        environment: Dev
         strategy: 
           matrix:
             node-version: [16.x]
