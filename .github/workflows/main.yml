@@ -18,3 +18,8 @@ jobs:
           - run: npm install
           - run: npm run start --if-present
           - run: npm test
+          - env:
+              PORT: ${{ secrets.PORT }}
+              SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+              JWT_SECRET: ${{ secrets.JWT_SECRET }}
+              MONGODB_URL: ${{ secrets.MONGODB_URL }}
