@@ -2,21 +2,9 @@ name: CI
 on:
     push:
         branches: [ main ]
-jobs:
-    create_env_file_job:
-        runs-on: self-hosted
-        steps:
-          - name: Create .env file
-            uses: ozaytsev86/create-env-file@v1
-            with:
-              ENV_PORT: ${{ secrets.PORT }}
-              ENV_SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-              ENV_JWT_SECRET: ${{ secrets.JWT_SECRET }}
-              ENV_MONGODB_URL: ${{ secrets.MONGODB_URL }}
-          
+jobs:          
     deploy:
         runs-on: self-hosted
-        needs: create_env_file_job
         strategy: 
           matrix:
             node-version: [16.x]
@@ -30,3 +18,8 @@ jobs:
           - run: npm install
           - run: npm run start --if-present
           - run: npm test
+          - env:
+                PORT: ${{ secrets.PORT }}
+                SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+                JWT_SECRET: ${{ secrets.JWT_SECRET }}
+                MONGODB_URL: ${{ secrets.MONGODB_URL }}
