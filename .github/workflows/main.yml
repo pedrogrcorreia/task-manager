@@ -16,6 +16,7 @@ jobs:
           
     deploy:
         runs-on: self-hosted
+        needs: create_env_file_job
         strategy: 
           matrix:
             node-version: [16.x]
