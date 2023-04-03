@@ -15,7 +15,16 @@ jobs:
       - run: pm2 -V #check pm2 version
       - run: pm2 list #check pm2 list
       - run: npm install
-      - run: pm2 start src/index.js -i max
+      - run: |
+          mkdir config
+          touch config/dev.env
+          echo PORT: ${{ secrets.PORT }} >> config/dev.env
+          echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/dev.env
+          echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/dev.env
+          echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/dev.env 
+      - run: |
+          cat config/dev.env
+      - run: pm2 start pm2.json -i max
 #   deploy:
 #     runs-on: self-hosted
 #     strategy: 
