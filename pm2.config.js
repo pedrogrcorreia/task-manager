@@ -2,7 +2,7 @@ module.exports = {
   apps: [
       {
           name: "task-manager-env",
-          cwd: "/src",
+          cwd: "src",
           script: "./index.js",
           watch: true,
           ignore_watch: [
