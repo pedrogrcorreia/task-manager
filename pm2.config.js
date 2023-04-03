@@ -2,8 +2,7 @@ module.exports = {
   apps: [
       {
           name: "task-manager-env",
-          cwd: "src",
-          script: "./index.js",
+          script: "npm run dev-live",
           watch: true,
           ignore_watch: [
               ".git",
