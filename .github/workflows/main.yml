@@ -1,39 +1,53 @@
-name: CI
-on:
-    push:
-        branches: [ main ]
-jobs:     
-    deploy:
-        runs-on: self-hosted
-        environment: Dev
-        strategy: 
-          matrix:
-            node-version: [16.x]
-            
-        steps:
-          - uses: actions/checkout@v2
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v1
-            with:
-              node-version: ${{ matrix.node-version }}
-            
-          #- run: echo "${{ secrets.PORT }}"
-          - run: npm install
-          - run: |
-              mkdir config
-              touch config/dev.env
-              echo PORT: ${{ secrets.PORT }} >> config/dev.env
-              echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/dev.env
-              echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/dev.env
-              echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/dev.env 
-          - run: |
-              cat config/dev.env
-          - run: npm run dev --if-present
+#workflow name
+name: "simple workflow pm2 configuration"
 
-          #  env:
-          #    PORT: ${{ secrets.PORT }}
-          #    SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          #    JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          #    MONGODB_URL: ${{ secrets.MONGODB_URL }}
-          # - run: npm test
+#event, trigger action that running our Jobs.
+#In this file we trigger pm2-configuration every we push code to repository.
+on: [push]
+jobs:
+  pm2-configuration:
+    #runner, This job will be running in runner with Ubuntu Server latest version.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 #checkout code from repository, so we code downloaded in runner.
+      - uses: actions/setup-node@v3 #setup nodejs in our runner
+      - run: npm install pm2@latest -g #install pm2 global
+      - run: pm2 -V #check pm2 version
+      - run: pm2 list #check pm2 list
+      #running pm2 in mode cluster and --watch set to auto restart if index.js have changes.
+      - run: pm2 start src/index.js --watch -i max
+  
+  deploy:
+    runs-on: self-hosted
+    strategy: 
+      matrix:
+      node-version: [16.x]
+            
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+            
+        #- run: echo "${{ secrets.PORT }}"
+        - run: npm install
+        - run: |
+            mkdir config
+            touch config/dev.env
+            echo PORT: ${{ secrets.PORT }} >> config/dev.env
+
+          # echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/dev.env
+          #   echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/dev.env
+          #   echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/dev.env 
+        - run: |
+            cat config/dev.env
+        - run: npm run dev --if-present
+
+#           #  env:
+#           #    PORT: ${{ secrets.PORT }}
+#           #    SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+#           #    JWT_SECRET: ${{ secrets.JWT_SECRET }}
+#           #    MONGODB_URL: ${{ secrets.MONGODB_URL }}
+#           # - run: npm test
             

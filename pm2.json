@@ -1,0 +1,10 @@
+{
+  "apps": [
+      {
+          "name": "task-manager",
+          "cwd": "./src",
+          "script": "npm",
+          "args": "run dev"
+      }
+  ]
+}
