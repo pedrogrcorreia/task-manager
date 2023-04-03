@@ -24,7 +24,7 @@ jobs:
           echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/dev.env 
       - run: |
           cat config/dev.env
-      - run: pm2 start pm2.json -i max
+      - run: pm2 start pm2.json
 #   deploy:
 #     runs-on: self-hosted
 #     strategy: 
