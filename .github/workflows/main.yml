@@ -9,6 +9,7 @@ jobs:
     #runner, This job will be running in runner with Ubuntu Server latest version.
     runs-on: self-hosted
     steps:
+      - run: cd /Users/pedrocorreia/desktop/
       - uses: actions/checkout@v3 #checkout code from repository, so we code downloaded in runner.
       - uses: actions/setup-node@v3 #setup nodejs in our runner
       - run: npm install pm2@latest -g #install pm2 global
