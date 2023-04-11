@@ -18,6 +18,7 @@ jobs:
       - run: |
           mkdir config
           touch config/dev.env
+          echo WORKSPACE: echo $GITHUB_WORKSPACE
           echo PORT: ${{ secrets.PORT }} >> config/dev.env
           echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/dev.env
           echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/dev.env
