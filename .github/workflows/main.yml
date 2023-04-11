@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          GITHUB_WORKSPACE: /Users/pedrocorreia/Desktop/runner/task-manager/ #checkout code from repository, so we code downloaded in runner.
+          path: /Users/pedrocorreia/Desktop/runner/task-manager/ #checkout code from repository, so we code downloaded in runner.
       - uses: actions/setup-node@v3 #setup nodejs in our runner
       - run: npm install pm2@latest -g #install pm2 global
       - run: pm2 -V #check pm2 version
