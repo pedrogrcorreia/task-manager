@@ -25,7 +25,7 @@ test('Should signup a new user', async () => {
         }
     })
 
-    expect(user.password)./*not.*/toBe('admin123')
+    expect(user.password).not.toBe('admin123')
 })
 
 test('Should login userOne', async () => {
