@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.588">
+  <testsuite name="tests/user.test.js" errors="0" failures="0" skipped="0" timestamp="2023-06-12T13:05:18" time="1.169" tests="10">
+    <testcase classname="-Should signup a new user" name="-Should signup a new user" time="0.13">
+    </testcase>
+    <testcase classname="-Should login userOne" name="-Should login userOne" time="0.08">
+    </testcase>
+    <testcase classname="-Should not login nonexistent user" name="-Should not login nonexistent user" time="0.063">
+    </testcase>
+    <testcase classname="-Should get profile for user" name="-Should get profile for user" time="0.046">
+    </testcase>
+    <testcase classname="-Should not get profile for not auth user" name="-Should not get profile for not auth user" time="0.043">
+    </testcase>
+    <testcase classname="-Should delete account for user" name="-Should delete account for user" time="0.046">
+    </testcase>
+    <testcase classname="-Should not delete acc for non auth user" name="-Should not delete acc for non auth user" time="0.043">
+    </testcase>
+    <testcase classname="-Should update avatar" name="-Should update avatar" time="0.059">
+    </testcase>
+    <testcase classname="-Should update user field" name="-Should update user field" time="0.047">
+    </testcase>
+    <testcase classname="-Should not update user field" name="-Should not update user field" time="0.043">
+    </testcase>
+  </testsuite>
+  <testsuite name="tests/task.test.js" errors="0" failures="0" skipped="0" timestamp="2023-06-12T13:05:20" time="0.382" tests="3">
+    <testcase classname="-Should create task for user" name="-Should create task for user" time="0.081">
+    </testcase>
+    <testcase classname="-Should return user tasks" name="-Should return user tasks" time="0.049">
+    </testcase>
+    <testcase classname="-Should fail userTwo to delete userOneTask" name="-Should fail userTwo to delete userOneTask" time="0.047">
+    </testcase>
+  </testsuite>
+</testsuites>
