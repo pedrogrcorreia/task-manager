@@ -10,10 +10,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
       - uses: actions/checkout@v3 #checkout code from repository, so we code downloaded in runner.
       - uses: actions/setup-node@v3 #setup nodejs in our runner
       - run: npm install
@@ -27,27 +23,26 @@ jobs:
       - run: |
           cat config/test.env
       - run: npm run action-test
-      - name: Upload Test Results
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: test-results/**/*.xml
         if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Test Results
-          path: 'test-results/**/*.xml'
 
-  publish-test-results:
-    name: 'Publish Tests Results'
-    needs: build-and-test
-    runs-on: self-hosted
-    # the build-and-test job might be skipped, we don't need to run this job then
-    if: success() || failure()
+  # publish-test-results:
+  #   name: 'Publish Tests Results'
+  #   needs: build-and-test
+  #   runs-on: self-hosted
+  #   # the build-and-test job might be skipped, we don't need to run this job then
+  #   if: success() || failure()
 
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v3
-        with:
-          path: artifacts
+  #   steps:
+  #     - name: Download Artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         path: artifacts
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        with:
-          files: 'artifacts/**/*.xml'
+  #     - name: Publish Test Results
+  #       uses: EnricoMi/publish-unit-test-result-action/composite@v2
+  #       with:
+  #         files: 'artifacts/**/*.xml'
