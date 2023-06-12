@@ -60,6 +60,10 @@ const setupDatabase = async () => {
     await new Task(taskThree).save()
 }
 
+afterAll(async () => {
+    await mongoose.connection.close();
+});
+
 module.exports = {
     userOneId,
     userOne,

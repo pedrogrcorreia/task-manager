@@ -5,7 +5,7 @@ name: 'test run'
 #In this file we trigger pm2-configuration every we push code to repository.
 on: [push]
 jobs:
-  pm2-configuration:
+  test:
     #runner, This job will be running in runner with Ubuntu Server latest version.
     runs-on: self-hosted
     steps:
@@ -15,10 +15,10 @@ jobs:
       - run: |
           mkdir config
           touch config/test.env
-          echo PORT: ${{ secrets.PORT }} >> config/dev.env
+          echo PORT: ${{ secrets.PORT }} >> config/test.env
           echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/dev.env
           echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/dev.env
           echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/dev.env
       - run: |
           cat config/test.env
-      - run: npm run test
+      - run: npm run action-test

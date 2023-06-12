@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
-    "test": "env-cmd -f ./config/test.env jest --watchAll --detectOpenHandles --runInBand --collectCoverage"
+    "test": "env-cmd -f ./config/test.env jest --watchAll --detectOpenHandles --runInBand --collectCoverage",
+    "action-test": "env-cmd -f ./config/test.env jest --runInBand --collectCoverage"
   },
   "jest": {
     "testEnvironment": "node"
