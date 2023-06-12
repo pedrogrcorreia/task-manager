@@ -15,10 +15,10 @@ jobs:
       - run: |
           mkdir config
           touch config/test.env
-          echo PORT: ${{ secrets.PORT }} >> config/test.env
-          echo SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }} >> config/test.env
-          echo JWT_SECRET: ${{ secrets.JWT_SECRET }} >> config/test.env
-          echo MONGODB_URL: ${{ secrets.MONGODB_URL }} >> config/test.env
+          echo PORT=${{ secrets.PORT }} >> config/test.env
+          echo SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} >> config/test.env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> config/test.env
+          echo MONGODB_URL=${{ secrets.MONGODB_URL }} >> config/test.env
       - run: |
           cat config/test.env
       - run: npm run action-test
